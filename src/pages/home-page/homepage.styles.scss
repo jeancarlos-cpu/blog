@@ -1,0 +1,28 @@
+.homepage-grid {
+  display: grid;
+  grid-template-areas:
+    "righttop main main main main"
+    "rightbottom main main main main";
+  .users-grid {
+    grid-area: righttop;
+  }
+  .comments-grid {
+    grid-area: rightbottom;
+  }
+  .posts-grid {
+    grid-area: main;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .homepage-grid {
+    grid-template-areas:
+      "main";
+  }
+  .comments-grid {
+    display: none;
+  }
+  .users-grid {
+    display: none;
+  }
+}

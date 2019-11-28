@@ -4,7 +4,7 @@
   padding: 5px 10px;
   background-color: var(--background);
   height: fit-content;
-
+  
   h1 {
     margin: 0;
     font-size: 14px;
@@ -24,11 +24,10 @@
     .roboimg {
       margin: 0 5px;
       flex: 0 1 0px;
-      // background: radial-gradient(
-      //   circle,
-      //   rgba(63, 32, 186, 1) 0%,
-      //   rgba(255, 255, 255, 1) 70%
-      // );
+      height: 60px;
+      img {
+        height: 100%;
+      }
     }
     div {
       flex: 100 0 0;
@@ -40,7 +39,7 @@
       h1 {
         color: var(--secondary);
         font-size: 20px;
-        margin: 0;
+        margin: 0 5px;
       }
       span {
         color: var(--primary);

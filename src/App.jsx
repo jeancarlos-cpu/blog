@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "./pages/home-page/home-page.component";
 import LoginPage from "./pages/login-page/login-page.component";
+import ProfilePage from "./pages/profile-page/profile-page.component";
 import Header from "./components/header/header.component";
 
 const IS_USER_LOGGED_IN = gql`
@@ -20,6 +21,8 @@ export default () => {
       <Header isLoggedIn={isLoggedIn}/>
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route path="/profile/:userId" component={ProfilePage} />
+
         <Route
           path="/login"
           render={() =>

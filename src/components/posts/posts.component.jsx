@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import Loading from "../loading/loading";
+import PostsItems from "../posts-items/posts-items.component";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import Moment from "react-moment";
-import toUpper from "../../utils/firstLettersToUpperCase";
-import "./posts.styles.scss";
 
 export default () => {
   const { loading, error, data, fetchMore } = useQuery(GET_POSTS, {
@@ -22,7 +19,7 @@ export default () => {
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult.posts.length) {
           sethasMorePosts(false);
-          console.log('foi')
+          console.log("foi");
           return prev;
         }
         return {
@@ -32,30 +29,14 @@ export default () => {
     });
   };
 
-  if (loading) return <Loading />;
-  if (error) return "Error :(";
   return (
-    <div className="posts-container">
-      {data.posts.map((post, index) => (
-        <div className="post-container" key={index}>
-          <div className="post-title">
-            <div>{post.title}</div>
-            <div className="date">
-              <Moment fromNow>{post.createdAt}</Moment>
-            </div>
-          </div>
-          <div className="post-body">{post.body}</div>
-          <div className="post-footer">Author: {toUpper(post.author.name)}</div>
-        </div>
-      ))}
-      <button
-      className="load-more"
-        onClick={handleLoadMore}
-        style={!hasMorePosts ? { display: "none" } : null}
-      >
-        Load more
-      </button>
-    </div>
+    <PostsItems
+      data={data}
+      loading={loading}
+      error={error}
+      hasMorePosts={hasMorePosts}
+      handleLoadMore={handleLoadMore}
+    />
   );
 };
 

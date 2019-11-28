@@ -6,7 +6,6 @@ import { useApolloClient } from "@apollo/react-hooks";
 
 export default ({ isLoggedIn }) => {
   const client = useApolloClient();
-  console.log(isLoggedIn)
   const handleSignOut = () => {
     localStorage.clear();
     client.writeData({ data: { isLoggedIn: false } });

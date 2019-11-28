@@ -1,6 +1,7 @@
 import React from "react";
 import Loading from "../loading/loading";
 import { useQuery } from "@apollo/react-hooks";
+import { useHistory } from "react-router-dom";
 import { gql } from "apollo-boost";
 import Moment from "react-moment";
 import "moment-timezone";
@@ -21,6 +22,7 @@ export default () => {
   const { data, loading, error } = useQuery(GET_NEW_USERS, {
     variables: { orderBy: "createdAt_DESC", first: 3 }
   });
+  const history = useHistory();
   if (error) return "Error :(";
   return (
     <div className="users-container">
@@ -28,11 +30,11 @@ export default () => {
       {loading ? (
         <Loading />
       ) : (
-        data.users.map((user, index) => (
-          <div key={index}>
+        data.users.map(user => (
+          <div key={user.id} onClick={() => history.push(`profile/${user.id}`)}>
             <div className="roboimg">
               <img
-                src={`https://robohash.org/${user.id}?set=set2&size=65x70`}
+                src={`https://robohash.org/${user.id}?set=set2`}
                 alt=""
               />
             </div>

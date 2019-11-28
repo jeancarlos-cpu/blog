@@ -1,16 +1,25 @@
 .homepage-grid {
   display: grid;
   grid-template-areas:
-    "righttop main main main main"
-    "rightbottom main main main main";
+    "righttop main"
+    "rightbottom main";
   .users-grid {
     grid-area: righttop;
+    min-width: 0;
+    height: fit-content;
+    // padding-bottom: 1px;
+    margin-bottom: 5px;
   }
   .comments-grid {
     grid-area: rightbottom;
+    min-height: 0;
+    min-width: 0;
+    height: fit-content;
+    // max-height: 0;
   }
   .posts-grid {
     grid-area: main;
+    min-width: fit-content;
   }
 }
 

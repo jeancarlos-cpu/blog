@@ -26,7 +26,7 @@ export default () => {
     <div className="users-container">
       <h1>New Users</h1>
       {loading ? (
-        <Loading/>
+        <Loading />
       ) : (
         data.users.map((user, index) => (
           <div key={index}>

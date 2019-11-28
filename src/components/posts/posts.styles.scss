@@ -3,7 +3,7 @@
   flex-direction: column;
   background-color: white;
   overflow-y: scroll;
-  height: 80vh;
+  max-height: 80vh;
   .post-container {
     border: solid 2.5px var(--background);
     border-radius: 5px;

@@ -3,7 +3,7 @@
   margin: 0px 5px 5px 10px;
   padding: 5px 10px;
   background-color: var(--background);
-  height: stretch;
+  height: fit-content;
 
   h1 {
     margin: 0;
@@ -13,7 +13,7 @@
   }
   div {
     margin: 5px 0px;
-    padding: 0;
+    padding: 5px 0;
     background-color: white;
     border-radius: 5px;
     display: flex;
@@ -24,11 +24,11 @@
     .roboimg {
       margin: 0 5px;
       flex: 0 1 0px;
-      background: radial-gradient(
-        circle,
-        rgba(63, 32, 186, 1) 0%,
-        rgba(255, 255, 255, 1) 70%
-      );
+      // background: radial-gradient(
+      //   circle,
+      //   rgba(63, 32, 186, 1) 0%,
+      //   rgba(255, 255, 255, 1) 70%
+      // );
     }
     div {
       flex: 100 0 0;

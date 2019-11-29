@@ -17,19 +17,19 @@
   }
   .posts-grid {
     grid-area: main;
-    min-width: fit-content;
+    // min-width: fit-content;
+    // flex-grow: 1 1 0;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .homepage-grid {
-    grid-template-areas:
-      "main";
-  }
-  .comments-grid {
-    display: none;
-  }
-  .users-grid {
-    display: none;
+    grid-template-areas: "main";
+    .comments-grid {
+      display: none;
+    }
+    .users-grid {
+      display: none;
+    }
   }
 }

@@ -1,16 +1,13 @@
 import React from "react";
 import Loading from "../loading/loading";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import Moment from "react-moment";
+import { useHistory } from "react-router-dom";
 import toUpper from "../../utils/firstLettersToUpperCase";
 import "./comments.styles.scss";
 
-export default () => {
-  const { loading, error, data } = useQuery(GET_COMMENTS, {
-    variables: { orderBy: "createdAt_DESC" }
-  });
+export default ({ loading, error, data }) => {
   if (error) return "Error :(";
+  const history = useHistory();
 
   return (
     <div className="comments-container">
@@ -19,7 +16,11 @@ export default () => {
         <Loading />
       ) : (
         data.comments.map((comment, index) => (
-          <div className="comment-container" key={index}>
+          <div
+            onClick={() => history.push(`/profile/${comment.author.id}`)}
+            className="comment-container"
+            key={index}
+          >
             <div className="comment-text">{comment.text}</div>
             <div className="date">
               <div>{toUpper(comment.author.name)}</div>
@@ -33,16 +34,3 @@ export default () => {
     </div>
   );
 };
-
-export const GET_COMMENTS = gql`
-  query getComments($skip: Int, $orderBy: CommentOrderByInput) {
-    comments(skip: $skip, orderBy: $orderBy) {
-      id
-      text
-      author {
-        name
-      }
-      createdAt
-    }
-  }
-`;

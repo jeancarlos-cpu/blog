@@ -1,56 +1,45 @@
-import React, { useState } from "react";
-import PostsItems from "../posts-items/posts-items.component";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import Loading from "../loading/loading";
+import Moment from "react-moment";
+import toUpper from "../../utils/firstLettersToUpperCase";
+import "./posts.styles.scss";
 
-export default () => {
-  const { loading, error, data, fetchMore } = useQuery(GET_POSTS, {
-    variables: { orderBy: "createdAt_DESC", first: 6 }
-  });
+export default ({ data, loading, error, handleLoadMore, hasMorePosts }) => {
+  if (loading) return <Loading />;
+  if (error) return "Error :(";
 
-  const [hasMorePosts, sethasMorePosts] = useState(true);
-
-  const handleLoadMore = () => {
-    fetchMore({
-      variables: {
-        skip: data.posts.length,
-        first: 3
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult.posts.length) {
-          sethasMorePosts(false);
-          console.log("foi");
-          return prev;
-        }
-        return {
-          posts: [...prev.posts, ...fetchMoreResult.posts]
-        };
-      }
-    });
-  };
+  const history = useHistory();
 
   return (
-    <PostsItems
-      data={data}
-      loading={loading}
-      error={error}
-      hasMorePosts={hasMorePosts}
-      handleLoadMore={handleLoadMore}
-    />
+    <div className="posts-container">
+      {data.posts.map(post => (
+        <div
+          className="post-container"
+          key={post.id}
+        >
+          <div className="post-title" onClick={() => history.push(`/post/${post.id}`)}>
+            <div>{post.title}</div>
+            <div className="date">
+              <Moment fromNow>{post.createdAt}</Moment>
+            </div>
+          </div>
+          <div className="post-body">{post.body.slice(0, 350) + "..."}</div>
+          <div className="post-footer">
+            Author:{" "}
+            <span onClick={() => history.push(`/profile/${post.author.id}`)}>
+              {toUpper(post.author.name)}
+            </span>
+          </div>
+        </div>
+      ))}
+      <button
+        className="load-more"
+        onClick={handleLoadMore}
+        style={!hasMorePosts ? { display: "none" } : null}
+      >
+        Load more
+      </button>
+    </div>
   );
 };
-
-export const GET_POSTS = gql`
-  query getPosts($first: Int, $skip: Int, $orderBy: PostOrderByInput) {
-    posts(first: $first, skip: $skip, orderBy: $orderBy) {
-      id
-      title
-      body
-      createdAt
-      author {
-        id
-        name
-      }
-    }
-  }
-`;

@@ -2,21 +2,26 @@
   display: flex;
   flex-direction: column;
   margin: 0px 5px 5px 10px;
+  padding: 0 10px 15px 10px;
   border-radius: 5px;
   background: var(--background);
-  height: fit-content;
+  cursor: pointer;
 
   h1 {
     margin: 5px;
-    font-size: 1.6em;
+    font-size: 1.3em;
+    text-align: center;
   }
 
   .comment-container {
-    margin: 10px;
+    border-radius: 10px;
+    margin: 5px 10px;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
     font-size: 18px;
+    border-radius: 5px;
+    background: white;
     .date {
       display: flex;
       flex-direction: row;

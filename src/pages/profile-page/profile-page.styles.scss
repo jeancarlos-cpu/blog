@@ -1,33 +1,52 @@
 .profile {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 0 10px;
+  display: grid;
+  grid-template-areas:
+    "left-top right right right right right"
+    "left-bottom right right right right right";
+  margin: 0 10px;
 
-    .user-data {
-        background: var(--background);
-        height: fit-content;
-        padding: 4px;
-        text-align: center;
-        border: solid 5px var(--background);
-        border-radius: 5px;
-        margin-bottom: 10px;
-        img {
-            background: white;
-        }
-        h2 {
-            margin: 5px 0;
-        }
+  .pic-grid {
+    background: var(--background);
+    grid-area: left-top;
+    height: fit-content;
+    min-height: 0;
+    min-width: 0;
+    padding: 4px;
+    text-align: center;
+    border: solid 5px var(--background);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    img {
+      background: white;
     }
+    h2 {
+      margin: 5px 0;
+    }
+  }
 
-    .posts {
-        flex: 1 1 0px;
-        margin: 0 10px;
-        height: fit-content;
-        min-width: 50vw;
-        h2 {
-            text-align: center;
-            margin: 0 0 20px 0;
-        }
+  .comments-grid {
+    grid-area: left-bottom;
+  }
+
+  .posts-grid {
+    grid-area: right;
+    h2 {
+      text-align: center;
+      margin: 0 0 20px 0;
     }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .profile {
+    grid-template-areas:
+      "left-top"
+      "left-bottom"
+      "right";
+      width: 100vw;
+  }
+
+  .comments-grid {
+    display: block;
+  }
 }

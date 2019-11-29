@@ -31,15 +31,16 @@ export default () => {
         <Loading />
       ) : (
         data.users.map(user => (
-          <div key={user.id} onClick={() => history.push(`profile/${user.id}`)}>
-            <div className="roboimg">
-              <img
-                src={`https://robohash.org/${user.id}?set=set2`}
-                alt=""
-              />
+          <div
+            className="user-container"
+            key={user.id}
+            onClick={() => history.push(`profile/${user.id}`)}
+          >
+            <div className="userimg">
+              <img src={`https://robohash.org/${user.id}?set=set2`} alt="" />
             </div>
-            <div>
-              <h1>{firstToUpperCase(user.name)}</h1>
+            <div className="profile">
+              <h1 className="name">{firstToUpperCase(user.name)}</h1>
               <span>
                 <Moment
                   format="DD/MM/YYYY hh:mm:ss"

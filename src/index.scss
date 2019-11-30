@@ -1,21 +1,40 @@
 :root {
-    --primary: #2f353f;
-    --secondary: #3f20ba;
-    --secondary-hover: #3f20fd;
-    --background: rgb(244, 246, 248);
+  // --primary: #2f353f;
+  // --secondary: #3f20ba;
+  // --secondary-hover: #3f20fd;
+  // --background: rgb(244, 246, 248);
+
+  --background1: #fffffe;
+  --background2: #d8eefe;
+  --highlight: #3da9fc;
+  --stroke: #094067;
+  --secondary: #90b4ce;
+  --paragraphy: #5f6c7b;
+  --tertiary: #ef4565;
 }
 
 @font-face {
-    font-family: 'Lato';
-    src: url("./fonts/Lato-Regular.ttf");
+  font-family: "Lato";
+  src: url("./fonts/Lato-Regular.ttf");
 }
 
 body {
-    margin: 0px 0px;
-    box-sizing: border-box;
-    padding: 0 15px;
-    font-family: 'Lato', 'Arial';
-    display: inline-block;
-    width: 100vw;
-};
+  margin: 0px 0px;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0 15px;
+  font-family: "Lato", "Arial";
+  width: 100vw;
+  background: var(--background1);
+}
 
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: 0;
+  margin-right: 0;
+  border-style: inset;
+  border-width: 0.5px;
+  border-color: var(--secondary);
+}

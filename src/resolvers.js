@@ -4,6 +4,10 @@ export const typeDefs = gql`
   extend type Query {
     isLoggedIn: Boolean!
   }
+
+  extend type User {
+    profilePicture: Boolean!
+  }
 `;
 
 export const IS_LOGGED_IN = gql`
@@ -17,6 +21,12 @@ export const resolvers = {
     isLoggedIn: (parent, args, { cache }) => {
       const { isLoggedIn } = cache.readQuery({ query: IS_LOGGED_IN });
       return isLoggedIn;
+    }
+  },
+  User: {
+    profilePicture: (parent, args, { cache }) => {
+      const { id } = parent;
+      return `https://robohash.org/${id}?set=set2`;
     }
   }
 };

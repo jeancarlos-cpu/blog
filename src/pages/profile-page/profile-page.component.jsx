@@ -13,6 +13,7 @@ const GET_USER_BY_ID = gql`
     users(query: $query) {
       id
       name
+      profilePicture @client
       posts {
         id
         title
@@ -52,7 +53,7 @@ export default () => {
   return (
     <div className="profile">
       <div className="pic-grid">
-        <img src={`https://robohash.org/${userId}?set=set2`} alt="" />
+        <img src={user.profilePicture} alt="" />
         <h2>{upper(user.name)}</h2>
       </div>
       <div className="comments-grid">

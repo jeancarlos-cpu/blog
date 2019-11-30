@@ -8,6 +8,7 @@ import "./comments.styles.scss";
 export default ({ loading, error, data }) => {
   if (error) return "Error :(";
   const history = useHistory();
+  console.log(data);
 
   return (
     <div className="comments-container">

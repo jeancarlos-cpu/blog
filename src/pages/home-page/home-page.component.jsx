@@ -7,8 +7,8 @@ import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 
 export const GET_COMMENTS = gql`
-  query getComments($skip: Int, $orderBy: CommentOrderByInput) {
-    comments(skip: $skip, orderBy: $orderBy) {
+  query getComments($orderBy: CommentOrderByInput) {
+    comments(first: 4, skip: 0, orderBy: $orderBy) {
       id
       text
       author {

@@ -1,13 +1,15 @@
 .homepage-grid {
+  margin: 0 30px;
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
   grid-template-areas:
-    "righttop main main main main"
-    "rightbottom main main main main";
+    "righttop main main main"
+    "rightbottom main main main";
   .users-grid {
     grid-area: righttop;
     min-width: 0;
     height: fit-content;
-    margin-bottom: 5px;
   }
   .comments-grid {
     grid-area: rightbottom;
@@ -17,14 +19,12 @@
   }
   .posts-grid {
     grid-area: main;
-    // min-width: fit-content;
-    // flex-grow: 1 1 0;
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 980px) {
   .homepage-grid {
-    grid-template-areas: "main";
+    grid-template-areas: "main main main main";
     .comments-grid {
       display: none;
     }

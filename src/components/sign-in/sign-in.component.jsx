@@ -7,11 +7,14 @@ import { useMutation, useApolloClient } from "@apollo/react-hooks";
 export default () => {
   const [state, setState] = useState(initialState);
   const client = useApolloClient();
+
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted: ({ login }) => {
       localStorage.setItem("token", login.token);
       client.writeData({ data: { isLoggedIn: true } });
-    }
+      setState(initialState);
+    },
+    onError: e => alert(e.message)
   });
 
   const handleSignIn = event => {

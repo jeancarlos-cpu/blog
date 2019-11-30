@@ -18,8 +18,8 @@ export default ({ data, loading, error, handleLoadMore, hasMorePosts }) => {
           className="post-container"
           key={post.id}
         >
-          <div className="post-title" onClick={() => history.push(`/post/${post.id}`)}>
-            <div>{post.title}</div>
+          <div className="post-title">
+            <div className='title' onClick={() => history.push(`/post/${post.id}`)}>{post.title}</div>
             <div className="date">
               <Moment fromNow>{post.createdAt}</Moment>
             </div>

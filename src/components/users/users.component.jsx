@@ -14,39 +14,38 @@ export const GET_NEW_USERS = gql`
       id
       name
       createdAt
+      profilePicture @client
     }
   }
 `;
 
 export default () => {
-  const { data, loading, error } = useQuery(GET_NEW_USERS, {
+  const history = useHistory();
+  const a = useQuery(GET_NEW_USERS, {
     variables: { orderBy: "createdAt_DESC", first: 3 }
   });
-  const history = useHistory();
-  if (error) return "Error :(";
+  if (a.error) return "Error :(";
+  if (a.loading) return "Error :(";
+  console.log(a);
   return (
     <div className="users-container">
       <h1>New Users</h1>
-      {loading ? (
+      {a.loading ? (
         <Loading />
       ) : (
-        data.users.map(user => (
+        a.data.users.map(user => (
           <div
             className="user-container"
             key={user.id}
             onClick={() => history.push(`profile/${user.id}`)}
           >
             <div className="userimg">
-              <img src={`https://robohash.org/${user.id}?set=set2`} alt="" />
+              <img src={user.profilePicture} alt="" />
             </div>
             <div className="profile">
               <h1 className="name">{firstToUpperCase(user.name)}</h1>
               <span>
-                <Moment
-                  format="DD/MM/YYYY hh:mm:ss"
-                  date={user.createdAt}
-                  tz={"America/Sao_Paulo"}
-                />
+                <Moment fromNow>{user.createdAt}</Moment>
               </span>
             </div>
           </div>

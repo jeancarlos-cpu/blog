@@ -1,26 +1,29 @@
 .users-container {
   display: flex;
   flex-direction: column;
-  background-color: var(--background);
+  background: var(--background2);
   height: fit-content;
-  margin: 0px 5px 5px 10px;
+  // margin: 0px 5px 5px 10px;
   padding: 0 10px 15px 10px;
-  border-radius: 5px;
+  border-radius: 10px;
 
   h1 {
     margin: 0;
     font-size: 1.3em;
     text-align: center;
     vertical-align: center;
+    color: var(--stroke);
   }
   .user-container {
     display: flex;
-    background: white;
+    background: var(--background1);
     border-radius: 10px;
+    padding: 3px 0;
     margin: 5px 10px;
     cursor: pointer;
     .userimg {
       height: 60px;
+      margin: 0 5px;
       img {
         height: 100%;
       }
@@ -31,7 +34,13 @@
       align-items: flex-start;
       justify-content: center;
       .name {
-        color: var(--primary);
+        color: var(--stroke);
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      span {
+        color: var(--paragraphy);
       }
     }
   }

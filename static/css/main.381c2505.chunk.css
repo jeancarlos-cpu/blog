@@ -1,0 +1,2 @@
+:root{--background1:#fffffe;--background2:#d8eefe;--highlight:#3da9fc;--stroke:#094067;--secondary:#90b4ce;--paragraphy:#5f6c7b;--tertiary:#ef4565}@font-face{font-display:swap;font-family:Lato;src:url(/blog/static/media/Lato-Regular.2d36b1a9.ttf)}body{margin:0;display:inline-block;box-sizing:border-box;padding:0;font-family:Lato,Arial;width:100vw;background:#fffffe;background:var(--background1)}hr{display:block;margin:.5em 0;border:.5px inset #90b4ce;border-color:var(--secondary)}
+/*# sourceMappingURL=main.381c2505.chunk.css.map */

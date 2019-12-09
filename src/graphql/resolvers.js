@@ -1,4 +1,5 @@
 import { gql } from "apollo-boost";
+import { IS_USER_LOGGED_IN } from "./queries";
 
 export const typeDefs = gql`
   extend type Query {
@@ -6,20 +7,18 @@ export const typeDefs = gql`
   }
 
   extend type User {
-    profilePicture: Boolean!
+    profilePicture: String!
   }
-`;
 
-export const IS_LOGGED_IN = gql`
-  query IsUserLoggedIn {
-    isLoggedIn @client
+  extend type Post {
+    postPicture: String!
   }
 `;
 
 export const resolvers = {
   Query: {
     isLoggedIn: (parent, args, { cache }) => {
-      const { isLoggedIn } = cache.readQuery({ query: IS_LOGGED_IN });
+      const { isLoggedIn } = cache.readQeury({ query: IS_USER_LOGGED_IN });
       return isLoggedIn;
     }
   },
@@ -27,6 +26,13 @@ export const resolvers = {
     profilePicture: (parent, args, { cache }) => {
       const { id } = parent;
       return `https://robohash.org/${id}?set=set2`;
+    }
+  },
+  Post: {
+    postPicture: (parrent, args, { cache }) => {
+      return `https://picsum.photos/id/${Math.floor(
+        Math.random() * 300
+      )}/350/200`;
     }
   }
 };

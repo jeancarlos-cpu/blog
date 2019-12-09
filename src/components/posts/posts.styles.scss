@@ -49,17 +49,4 @@
       }
     }
   }
-  .load-more {
-    border-radius: 10px;
-    border: 0px;
-    background: var(--tertiary);
-    margin: 10px auto;
-    padding: 8px 2em;
-    color: var(--background1);
-    box-shadow: 2px 2px 2px lightgrey;
-    transition: transform 0.2s;
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
 }

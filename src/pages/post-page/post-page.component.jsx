@@ -7,32 +7,7 @@ import "./post-page.styles.scss";
 import Moment from "react-moment";
 import toUpper from "../../utils/firstLettersToUpperCase";
 import { useHistory } from "react-router-dom";
-
-export const GET_POST_BY_ID = gql`
-  query getPostById($id: ID!) {
-    post(id: $id) {
-      id
-      title
-      body
-      author {
-        id
-        name
-        profilePicture @client
-      }
-      createdAt
-      comments {
-        id
-        text
-        author {
-          id
-          name
-          profilePicture @client
-        }
-        createdAt
-      }
-    }
-  }
-`;
+import { GET_POST_BY_ID } from "../../graphql/queries";
 
 const CREATE_COMMENT = gql`
   mutation createComment($text: String!, $id: ID!) {
@@ -43,7 +18,7 @@ const CREATE_COMMENT = gql`
   }
 `;
 
-export default () => {
+export default ({ isLoggedIn }) => {
   const { postId } = useParams();
   const history = useHistory();
   const [text, setText] = useState("");
@@ -64,6 +39,7 @@ export default () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    // if (!isLoggedIn) return history.push("/login");
     createComment({ variables: { text, id: post.id } });
   };
 
@@ -83,7 +59,7 @@ export default () => {
       <p className="body">{post.body}</p>
       <hr />
       <form action="" onSubmit={handleSubmit}>
-      <h4>Leave us a comment</h4>
+        <h4>Leave us a comment</h4>
         <textarea
           className="comment-input"
           type="text"
@@ -92,7 +68,7 @@ export default () => {
           required={true}
           placeholder="Comment..."
           rows={"4"}
-          autofocus
+          autoFocus
         />
         <button>Send comment</button>
       </form>
@@ -100,10 +76,10 @@ export default () => {
       <div className="post-comments-container">
         <h2 className="title">Comments</h2>
         {post.comments.map(comment => (
-          <div className="post-comment-container">
+          <div className="post-comment-container" key={comment.id}>
             <div className="profile-p">
               <img src={comment.author.profilePicture} alt="" />
-              <spam>{comment.author.name}</spam>
+              <span>{comment.author.name}</span>
             </div>
             <div className="text-p">
               <p>{comment.text}</p>

@@ -1,43 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import UsersCard from "../../components/users/users.component";
 import Posts from "../../components/posts/posts.component";
 import Comments from "../../components/comments/comments.component";
 import "./homepage.styles.scss";
-import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
-
-export const GET_COMMENTS = gql`
-  query getComments($orderBy: CommentOrderByInput) {
-    comments(first: 4, skip: 0, orderBy: $orderBy) {
-      id
-      text
-      author {
-        id
-        name
-      }
-      createdAt
-    }
-  }
-`;
-
-export const GET_POSTS = gql`
-  query getPosts($first: Int, $skip: Int, $orderBy: PostOrderByInput) {
-    posts(first: $first, skip: $skip, orderBy: $orderBy) {
-      id
-      title
-      body
-      createdAt
-      author {
-        id
-        name
-      }
-    }
-  }
-`;
+import { GET_COMMENTS, GET_POSTS } from "../../graphql/queries";
 
 export default () => {
   const commentsQuery = useQuery(GET_COMMENTS, {
-    variables: { orderBy: "createdAt_DESC" }
+    variables: { orderBy: "createdAt_DESC", first: 5 }
   });
 
   const postsQuery = useQuery(GET_POSTS, {
@@ -55,7 +26,6 @@ export default () => {
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult.posts.length) {
           sethasMorePosts(false);
-          console.log("foi");
           return prev;
         }
         return {

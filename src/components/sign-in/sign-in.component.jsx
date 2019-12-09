@@ -3,9 +3,11 @@ import Input from "../input/input.component";
 import "./sign-in.styles.scss";
 import { gql } from "apollo-boost";
 import { useMutation, useApolloClient } from "@apollo/react-hooks";
+import { useHistory } from "react-router-dom";
 
 export default () => {
   const [state, setState] = useState(initialState);
+  const history = useHistory();
   const client = useApolloClient();
 
   const [loginUser] = useMutation(LOGIN_USER, {
@@ -13,6 +15,7 @@ export default () => {
       localStorage.setItem("token", login.token);
       client.writeData({ data: { isLoggedIn: true } });
       setState(initialState);
+      history.goBack();
     },
     onError: e => alert(e.message)
   });

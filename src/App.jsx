@@ -1,33 +1,45 @@
-import React from "react";
-import { gql } from "apollo-boost";
+import React, { Suspense } from "react";
 import { useQuery } from "@apollo/react-hooks";
+import { IS_USER_LOGGED_IN } from "./graphql/queries";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import HomePage from "./pages/home-page/home-page.component";
-import LoginPage from "./pages/login-page/login-page.component";
-import ProfilePage from "./pages/profile-page/profile-page.component";
-import PostPage from "./pages/post-page/post-page.component";
 import Header from "./components/header/header.component";
-
-const IS_USER_LOGGED_IN = gql`
-  query isLoggedIn {
-    isLoggedIn @client
-  }
-`;
+import Loading from "./components/loading/loading";
+const HomePage = React.lazy(() =>
+  import("./pages/home-page/home-page.component")
+);
+const LoginPage = React.lazy(() =>
+  import("./pages/login-page/login-page.component")
+);
+const ProfilePage = React.lazy(() =>
+  import("./pages/profile-page/profile-page.component")
+);
+const PostPage = React.lazy(() =>
+  import("./pages/post-page/post-page.component")
+);
+const PostsCards = React.lazy(() => import("./components/posts-cards"));
 
 export default () => {
   const { data } = useQuery(IS_USER_LOGGED_IN);
   const { isLoggedIn } = data;
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={"/blog"}>
       <Header isLoggedIn={isLoggedIn} />
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/profile/:userId" component={ProfilePage} />
-        <Route path="/post/:postId" component={PostPage} />
-        <Route
-          path="/login"
-          render={() => (isLoggedIn ? <Redirect to="/" /> : <LoginPage />)}
-        />
+        <Suspense fallback={<Loading />}>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/profile/:userId" component={ProfilePage} />
+          <Route
+            path="/post/:postId"
+            component={PostPage}
+            isLoggedIn={isLoggedIn}
+          />
+          <Route
+            path="/login"
+            component={LoginPage}
+            // render={() => (isLoggedIn ? <Redirect to="/" /> : <LoginPage />)}
+          />
+          <Route path="/posts-cards" component={PostsCards} />
+        </Suspense>
       </Switch>
     </BrowserRouter>
   );

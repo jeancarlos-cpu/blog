@@ -22,11 +22,11 @@ export default () => {
   const { data } = useQuery(IS_USER_LOGGED_IN);
   const { isLoggedIn } = data;
   return (
-    <BrowserRouter basename={"/blog"}>
+    <BrowserRouter basename={process.env.REACT_APP_BASE_NAME}>
       <Header isLoggedIn={isLoggedIn} />
       <Switch>
         <Suspense fallback={<Loading />}>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/home" component={HomePage} />
           <Route path="/profile/:userId" component={ProfilePage} />
           <Route
             path="/post/:postId"
@@ -35,10 +35,9 @@ export default () => {
           />
           <Route
             path="/login"
-            component={LoginPage}
-            // render={() => (isLoggedIn ? <Redirect to="/" /> : <LoginPage />)}
+            render={() => (isLoggedIn ? <Redirect to="/" /> : <LoginPage />)}
           />
-          <Route path="/posts-cards" component={PostsCards} />
+          <Route exact path="/" component={PostsCards} />
         </Suspense>
       </Switch>
     </BrowserRouter>

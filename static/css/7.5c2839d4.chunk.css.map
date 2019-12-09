@@ -1,0 +1,1 @@
+{"version":3,"sources":["login-page.styles.scss"],"names":[],"mappings":"AAAA,YACE,YAAa,CACb,YAAmB,CACnB,kBAAmB,CACnB,sBAAuB,CACvB,6BAA8B","file":"7.5c2839d4.chunk.css","sourcesContent":[".login-page {\r\n  display: flex;\r\n  height: calc(100vh);\r\n  align-items: center;\r\n  justify-content: center;\r\n  background: var(--background2);\r\n}\r\n"]}

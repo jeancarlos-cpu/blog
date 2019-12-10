@@ -26,7 +26,8 @@ export default () => {
       <Header isLoggedIn={isLoggedIn} />
       <Switch>
         <Suspense fallback={<Loading />}>
-          <Route exact path="/home" component={HomePage} />
+          <Route path="/" component={PostsCards} />
+          <Route path="/home" component={HomePage} />
           <Route path="/profile/:userId" component={ProfilePage} />
           <Route
             path="/post/:postId"
@@ -37,7 +38,9 @@ export default () => {
             path="/login"
             render={() => (isLoggedIn ? <Redirect to="/" /> : <LoginPage />)}
           />
-          <Route exact path="/" component={PostsCards} />
+          {/* <Route exact={true} path="*">
+            <h1>Page not found</h1>
+          </Route> */}
         </Suspense>
       </Switch>
     </BrowserRouter>
